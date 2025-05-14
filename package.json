@@ -1,0 +1,25 @@
+{
+  "name": "markdownlint-rule-utils",
+  "version": "0.1.0",
+  "description": "A utility package to assist in the development of markdownlint custom rules.",
+  "keywords": [
+    "markdownlint",
+    "markdownlint-rule"
+  ],
+  "license": "MIT",
+  "author": "FloongyEX <floongyex@outlook.com>",
+  "type": "module",
+  "files": [
+    "lib",
+    "index.js",
+    "README.md",
+    "LICENSE",
+    "README.zh-CN.md"
+  ],
+  "exports": {
+    ".": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
