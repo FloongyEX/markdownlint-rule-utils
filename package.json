@@ -1,6 +1,6 @@
 {
   "name": "markdownlint-rule-utils",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A utility package to assist in the development of markdownlint custom rules.",
   "keywords": [
     "markdownlint",

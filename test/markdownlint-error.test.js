@@ -1,8 +1,8 @@
-import { ErrorDetail, Position, parseLintErrorOutputs } from "../lib/markdownlint-error.mjs"
+import { ErrorInfo, Position, parseLintErrorOutputs } from "../lib/markdownlint-error.mjs"
 import { TestCase } from "../lib/testcase.mjs"
 
-const errorDetails = [
-  new ErrorDetail(
+const errorInfoList = [
+  new ErrorInfo(
     ["test001", "test"],
     "test description",
     "test.md",
@@ -10,7 +10,7 @@ const errorDetails = [
     "test detail",
     "test context"
   ),
-  new ErrorDetail(
+  new ErrorInfo(
     ["test001", "test"],
     "test description",
     "test.md",
@@ -18,7 +18,7 @@ const errorDetails = [
     null,
     null
   ),
-  new ErrorDetail(
+  new ErrorInfo(
     ["test001", "test"],
     "test description",
     "test.md",
@@ -26,7 +26,7 @@ const errorDetails = [
     null,
     null
   ),
-  new ErrorDetail(
+  new ErrorInfo(
     ["test001", "test"],
     "test description",
     "test2.md",
@@ -34,7 +34,7 @@ const errorDetails = [
     null,
     null
   ),
-  new ErrorDetail(
+  new ErrorInfo(
     ["test001", "test"],
     "test description",
     "test.md",
@@ -42,7 +42,7 @@ const errorDetails = [
     null,
     null
   ),
-  new ErrorDetail(
+  new ErrorInfo(
     ["test001", "test"],
     "test description",
     "test.md",
@@ -50,7 +50,7 @@ const errorDetails = [
     "test detail",
     null
   ),
-  new ErrorDetail(
+  new ErrorInfo(
     ["test001", "test"],
     "test description",
     "test.md",
@@ -58,7 +58,7 @@ const errorDetails = [
     null,
     "test context"
   ),
-  new ErrorDetail(
+  new ErrorInfo(
     ["test002", "test2"],
     "test2 description",
     "test.md",
@@ -68,100 +68,100 @@ const errorDetails = [
   ),
 ]
 
-const positionComparisonTestCases = [
+const positionEqualityTestCases = [
   new TestCase(
-    "Position comparison test case 1",
-    "Position and non-Position should not be equal.",
+    "Position equality test case 1",
+    "Position object and non-Position object should not be equal.",
     {
-      pos1: errorDetails[0].position,
+      pos1: errorInfoList[0].position,
       pos2: null,
     },
     false
   ),
 ]
 
-const errorDetailStringTestCases = [
+const errorStringTestCases = [
   new TestCase(
-    "Error detail string test case 1",
-    "errorDetail.toString() should return the correct error detail string",
-    errorDetails[1],
+    "ErrorInfo string test case 1",
+    "ErrorInfo toString() should return the correct error string",
+    errorInfoList[1],
     `test.md:1:1 test001/test test description`,
   ),
   new TestCase(
-    "Error detail string test case 2",
-    "errorDetail.toString() should return the correct error detail string that without column number.",
-    errorDetails[4],
+    "ErrorInfo string test case 2",
+    "ErrorInfo toString() should return the correct error string that without column number.",
+    errorInfoList[4],
     `test.md:3 test001/test test description`,
   ),
   new TestCase(
-    "Error detail string test case 3",
-    "errorDetail.toString() should return the correct error detail string that includes all information.",
-    errorDetails[0],
+    "ErrorInfo string test case 3",
+    "ErrorInfo toString() should return the correct error string that includes all information.",
+    errorInfoList[0],
     `test.md:1:1 test001/test test description [test detail] [Context: "test context"]`,
   ),
 ]
 
-const errorDetailComparisonTestCases = [
+const errorInfoEqualityTestCases = [
   new TestCase(
-    "Error detail comparison test case 1",
-    "Error detail should be equal.",
+    "ErrorInfo equality test case 1",
+    "ErrorInfo object that have the same properties should be equal.",
     {
-      detail1: errorDetails[1],
-      detail2: errorDetails[2],
+      info1: errorInfoList[1],
+      info2: errorInfoList[2],
     },
     true
   ),
   new TestCase(
-    "Error detail comparison test case 2",
-    "Error detail should not be equal, because of different file names.",
+    "ErrorInfo equality test case 2",
+    "ErrorInfo should not be equal, because of different file names.",
     {
-      detail1: errorDetails[1],
-      detail2: errorDetails[3],
+      info1: errorInfoList[1],
+      info2: errorInfoList[3],
     },
     false
   ),
   new TestCase(
-    "Error detail comparison test case 3",
-    "Error detail should not be equal, because of different positions.",
+    "ErrorInfo equality test case 3",
+    "ErrorInfo should not be equal, because of different positions.",
     {
-      detail1: errorDetails[1],
-      detail2: errorDetails[4],
+      info1: errorInfoList[1],
+      info2: errorInfoList[4],
     },
     false
   ),
   new TestCase(
-    "Error detail comparison test case 4",
-    "Error detail should not be equal, because of different error details.",
+    "ErrorInfo equality test case 4",
+    "ErrorInfo should not be equal, because of different error infos.",
     {
-      detail1: errorDetails[1],
-      detail2: errorDetails[5],
+      info1: errorInfoList[1],
+      info2: errorInfoList[5],
     },
     false
   ),
   new TestCase(
-    "Error detail comparison test case 5",
-    "Error detail should not be equal, because of different contexts.",
+    "ErrorInfo equality test case 5",
+    "ErrorInfo should not be equal, because of different contexts.",
     {
-      detail1: errorDetails[1],
-      detail2: errorDetails[6],
+      info1: errorInfoList[1],
+      info2: errorInfoList[6],
     },
     false
   ),
   new TestCase(
-    "Error detail comparison test case 6",
-    "Error detail should not be equal, because of different rules.",
+    "ErrorInfo equality test case 6",
+    "ErrorInfo should not be equal, because of different rules.",
     {
-      detail1: errorDetails[1],
-      detail2: errorDetails[7],
+      info1: errorInfoList[1],
+      info2: errorInfoList[7],
     },
     false
   ),
   new TestCase(
-    "Error detail comparison test case 7",
-    "Error detail and non-ErrorDetail should not be equal.",
+    "ErrorInfo equality test case 7",
+    "ErrorInfo object and non-Errorinfo object should not be equal.",
     {
-      detail1: errorDetails[1],
-      detail2: null,
+      info1: errorInfoList[1],
+      info2: null,
     },
     false
   ),
@@ -170,19 +170,19 @@ const errorDetailComparisonTestCases = [
 const errorOutputsParsingTestCases = [
   new TestCase(
     "Error outputs parsing test case 1",
-    "parseErrorOutputs() should parse error outputs correctly.",
-    errorDetailStringTestCases.map((testCase) => testCase.expectedResult).join("\n"),
-    errorDetailStringTestCases.map((testCase) => testCase.input),
+    "parseLintErrorOutputs() should correctly parse all kind of invalid error outputs.",
+    errorStringTestCases.map((testCase) => testCase.expectedResult).join("\n"),
+    errorStringTestCases.map((testCase) => testCase.input),
   ),
   new TestCase(
     "Error outputs parsing test case 2",
-    "parseErrorOutputs() should return an empty array when the input have no invalid error outputs.",
+    "parseLintErrorOutputs() should return an empty array when the input have no invalid error outputs.",
     "This is a test string without error outputs.",
     [],
   ),
 ]
 
-describe.each(positionComparisonTestCases)(
+describe.each(positionEqualityTestCases)(
   "$name",
   ({ description, input, expectedResult }) => {
     test(`${description}`, () => {
@@ -194,25 +194,25 @@ describe.each(positionComparisonTestCases)(
   }
 )
 
-describe.each(errorDetailStringTestCases)(
+describe.each(errorStringTestCases)(
   "$name",
   ({ description, input, expectedResult }) => {
     test(`${description}`, () => {
-      const errorDetail = input
+      const errorInfo = input
 
-      expect(errorDetail.toString())
+      expect(errorInfo.toString())
         .toBe(expectedResult)
     })
   }
 )
 
-describe.each(errorDetailComparisonTestCases)(
+describe.each(errorInfoEqualityTestCases)(
   "$name",
   ({ description, input, expectedResult }) => {
     test(`${description}`, () => {
-      const { detail1, detail2 } = input
+      const { info1, info2 } = input
 
-      expect(detail1.equals(detail2))
+      expect(info1.equals(info2))
         .toBe(expectedResult)
     })
   }
@@ -224,9 +224,9 @@ describe.each(errorOutputsParsingTestCases)(
     test(`${description}`, () => {
       const errorOutputs = input
 
-      const parsedErrorDetails = parseLintErrorOutputs(errorOutputs)
+      const parsedErrorInfoList = parseLintErrorOutputs(errorOutputs)
 
-      expect(parsedErrorDetails)
+      expect(parsedErrorInfoList)
         .toEqual(expectedResult)
     })
   }
