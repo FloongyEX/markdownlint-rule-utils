@@ -37,5 +37,17 @@
   "dependencies": {
     "markdownlint": "^0.38.0",
     "markdownlint-rule-helpers": "^0.29.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FloongyEX/markdownlint-rule-utils.git"
+  },
+  "homepage": "https://github.com/FloongyEX/markdownlint-rule-utils",
+  "bugs": {
+    "url": "https://github.com/FloongyEX/markdownlint-rule-utils/issues"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "provenance": true
   }
 }
