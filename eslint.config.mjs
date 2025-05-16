@@ -1,7 +1,7 @@
 import js from "@eslint/js"
 import globals from "globals"
 import { defineConfig } from "eslint/config"
-import sharedConfigForStyling from "@floongyex/eslint-config-styling"
+import stylingConfig from "@floongyex/eslint-config-styling"
 import jest from "eslint-plugin-jest"
 
 export default defineConfig([
@@ -13,7 +13,7 @@ export default defineConfig([
   },
   {
     files: ["**/*.{js,mjs,cjs}"],
-    extends: [sharedConfigForStyling.stylistic]
+    extends: [stylingConfig.stylistic]
   },
   {
     files: ["test/*.test.{js,mjs,cjs}"],
